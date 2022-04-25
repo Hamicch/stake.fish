@@ -14,6 +14,7 @@ const Exchange = () => {
 	const [exchange, setExchange] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	let dollarUSLocale = Intl.NumberFormat("en-US");
 
 	const URL = `https://api.coingecko.com/api/v3/exchanges/${params.id}`;
 
@@ -42,7 +43,7 @@ const Exchange = () => {
 			) : (
 				<div className='p-5'>
 					{/* back button  */}
-					<div className='py-2 px-3 md:hidden'>
+					<div className='py-2 px-3 lg:hidden'>
 						<button onClick={() => navigate(-1)}>
 							<HiArrowSmLeft size={25} />
 						</button>
@@ -79,8 +80,11 @@ const Exchange = () => {
 									Activity
 								</p>
 								<p className='text-2xl text-black font-bold'>
-									{exchange.trade_volume_24h_btc_normalized.toFixed(
-										0
+									₿{" "}
+									{dollarUSLocale.format(
+										exchange.trade_volume_24h_btc_normalized.toFixed(
+											0
+										)
 									)}
 									K
 								</p>
